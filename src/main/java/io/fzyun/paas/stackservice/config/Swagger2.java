@@ -23,7 +23,7 @@ public class Swagger2 {
     public Docket docket() {
         ParameterBuilder token = new ParameterBuilder();
         List<Parameter> pars = new ArrayList();
-        token.name("ids-token")
+        token.name("X-Stack-Service-Token")
                 .description("访问令牌")
                 .modelRef(new ModelRef("string"))
                 .parameterType("header")
