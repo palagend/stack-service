@@ -45,13 +45,15 @@ public class BB8 implements RancherService, RedmineService, TemplateService, Com
     }
 
     @Override
-    public Ticket getTicket(String ticketId) {
-        return new Ticket();// TODO: 2018/9/13
+    public Ticket fetchTicket(String ticketId) { // TODO: 2018/9/13
+        Ticket ticket = new Ticket();
+        ticket.setInventory(template(ticketId));
+        return ticket;
     }
 
     @Override
     public Map<String, DockerCompose> compose(String ticketId) {
-        String stackId = getTicket(ticketId).getStackId();
+        String stackId = fetchTicket(ticketId).getStackId();
         DockerCompose dockerCompose = fetchDockerCompose(stackId);
         List<Bundle> template = template(ticketId);
         return merge(dockerCompose, template);
@@ -69,8 +71,8 @@ public class BB8 implements RancherService, RedmineService, TemplateService, Com
 
     @Override
     public boolean verify(String ticketId) {
-        List<Bundle> inventory = getTicket(ticketId).getInventory();
-        DockerCompose dc = fetchDockerCompose(getTicket(ticketId).getStackId());
+        List<Bundle> inventory = fetchTicket(ticketId).getInventory();
+        DockerCompose dc = fetchDockerCompose(fetchTicket(ticketId).getStackId());
 
         List<String> allServiceNamesInInventory = new LinkedList<>();
         inventory.forEach(bundle -> allServiceNamesInInventory.addAll(bundle.getSvcNames()));

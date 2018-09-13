@@ -38,7 +38,7 @@ public class EndpointSet {
     @GetMapping("/stacks/config/{ticket-id}")
     @ApiOperation("获取应用栈配置文件")
     public Response stackConfig(@PathVariable("ticket-id") String ticketId) {
-        String stackId = redmineService.getTicket(ticketId).getStackId();
+        String stackId = redmineService.fetchTicket(ticketId).getStackId();
         return Response.success(rancherService.fetchDockerCompose(stackId));
     }
 
