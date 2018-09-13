@@ -54,12 +54,16 @@ public class EndpointSet {
     public Response verify(@PathVariable("ticket-id") String ticketId) {
         if (templateService.verify(ticketId)) {
             return Response.success(templateService.verify(ticketId));
-        } else return Response.fail(-1, "fail");
+        }
+        return Response.fail(-1, "verify fail");
     }
 
     @GetMapping("/stacks/compose/{ticket-id}")
     @ApiOperation("合成DC部署配置文件")
     public Response compose(@PathVariable("ticket-id") String ticketId) {
-        return Response.success(composeService.compose(ticketId));
+        if (templateService.verify(ticketId)) {
+            return Response.success(composeService.compose(ticketId));
+        }
+        return Response.fail(-1, "verify fail");
     }
 }

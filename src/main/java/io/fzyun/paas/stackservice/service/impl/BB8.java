@@ -76,7 +76,8 @@ public class BB8 implements RancherService, RedmineService, TemplateService, Com
 
         List<String> allServiceNamesInInventory = new LinkedList<>();
         inventory.forEach(bundle -> allServiceNamesInInventory.addAll(bundle.getSvcNames()));
-        return !(allServiceNamesInInventory.retainAll(dc.getServices().values()) || dc.getServices().values().retainAll(allServiceNamesInInventory));//判断两个集合是否相等
+        Set<String> allServiceNamesInDc = dc.getServices().keySet();
+        return !(allServiceNamesInInventory.retainAll(allServiceNamesInDc) || allServiceNamesInDc.retainAll(allServiceNamesInInventory));//判断两个集合是否相等
     }
 
     private Map<String, DockerCompose> merge(DockerCompose dockerCompose, List<Bundle> bundles) {
