@@ -9,4 +9,9 @@ import java.util.Map;
 public class Service {
     String image;
     Map<String, String> labels = new HashMap<>();
+
+    public Service image(String image) {
+        this.image = image;
+        return this;
+    }
 }

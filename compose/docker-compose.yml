@@ -1,7 +1,7 @@
 version: '2'
 services:
   stack-service:
-    image: founder/stack-service:1.0.0.${BUILD_NUMBER}
+    image: founder/stack-services:1.0.0.${BUILD_NUMBER}
     stdin_open: true
     tty: true
     labels:

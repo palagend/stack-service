@@ -8,7 +8,7 @@
     <version>1.0.0</version>
     <packaging>jar</packaging>
 
-    <name>stack-service</name>
+    <name>stack-services</name>
     <description>方正云平台远程部署系统应用栈服务</description>
 
     <parent>
@@ -23,6 +23,8 @@
         <springfox.version>2.8.0</springfox.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+        <maven.compiler.source>1.8</maven.compiler.source>
+        <maven.compiler.target>1.8</maven.compiler.target>
         <java.version>1.8</java.version>
     </properties>
 

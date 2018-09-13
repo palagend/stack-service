@@ -2,6 +2,8 @@ package io.fzyun.paas.stackservice.model;
 
 import lombok.Data;
 
+import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -15,4 +17,12 @@ import java.util.Map;
 public class DockerCompose {
     String version = "2";
     Map<String, Service> services;
+
+    public DockerCompose extract(List<String> svcNames) {
+        DockerCompose dc = new DockerCompose();
+        Map<String, Service> map = new HashMap<>();
+        svcNames.forEach(name -> map.put(name, services.get(name)));
+        dc.setServices(map);
+        return dc;
+    }
 }
