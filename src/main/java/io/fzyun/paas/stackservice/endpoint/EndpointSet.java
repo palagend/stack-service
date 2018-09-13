@@ -1,15 +1,13 @@
 package io.fzyun.paas.stackservice.endpoint;
 
-import io.fzyun.paas.stackservice.model.DockerCompose;
-import io.fzyun.paas.stackservice.model.Service;
+import io.fzyun.paas.stackservice.model.*;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 @RestController
@@ -38,4 +36,42 @@ public class EndpointSet {
         dc.setServices(svcs);
         return dc;
     }
+
+    @GetMapping("/stacks/{stack-id}/template")
+    @ApiOperation("生成应用栈配置清单模板(???还有疑问)")
+    public InventoryTemplate inventoryTemplate(@PathVariable("stack-id") String stackId) {
+        return null;// TODO: 2018/9/13
+    }
+
+    @PostMapping("/stacks/verify")
+    @ApiOperation("验证部署清单文件")
+    public VerifyResult verify(@RequestBody Inventory inventory) {
+        return new VerifyResult();
+    }
+
+    @PostMapping("/stacks/{stack-id}/compose")
+    @ApiOperation("合成DC部署配置文件")
+    public List<DockerCompose> compose(@PathVariable("stack-id") String stackId) {
+        ArrayList<DockerCompose> lst = new ArrayList<>();
+        DockerCompose dc0 = getDockerCompose(0);
+        DockerCompose dc1 = getDockerCompose(1);
+        DockerCompose dc2 = getDockerCompose(1);
+        lst.add(dc0);
+        lst.add(dc1);
+        lst.add(dc2);
+        return lst;
+    }
+
+    private DockerCompose getDockerCompose(int idx) {
+        DockerCompose dc = new DockerCompose();
+        Map<String, Service> map = new HashMap<>();
+        Service svc0 = new Service();
+        Map<String, String> labels = new HashMap<>();
+        labels.put("host", "192.168.1." + idx);
+        svc0.setLabels(labels);
+        map.put("app" + idx, svc0);
+        dc.setServices(map);
+        return dc;
+    }
+
 }
