@@ -1,13 +1,13 @@
-node(){
+node("${env.NODE_DEFINED}"){
   timestamps {
     stage('Preparation') {
         checkout scm
    }
     stage('Build'){
-        sh 'cmd/build.sh'
+        sh 'ci/jenkins-build.sh'
     }
     stage('Deploy'){
-        sh 'cmd/deploy.sh'
+        sh 'ci/rancher-deploy.sh'
     }
   }
 }
