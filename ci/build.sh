@@ -7,5 +7,5 @@ docker run --rm \
 -v${HOME}/.docker/config.json:/root/.docker/config.json \
 -v/var/run/docker.sock:/var/run/docker.sock  \
 -w /workspace \
--e ${BUILD_NUMBER:-0} \
+-e BUILD_NUMBER=${BUILD_NUMBER:-0} \
 founder/maven:alpine mvn clean install -DskipTests -Pjenkins
