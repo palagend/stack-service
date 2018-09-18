@@ -25,17 +25,17 @@ Get Ticket Id
     ${count} =                          Get Length          ${data}
     Should Be True                      ${count} >= ${0}
 
-获取应用栈配置文件
-${STACK_CONFIG_URI}                     /${API_VERSION}/stacks/config/{ticket-id}
+# 获取应用栈配置文件
+# ${STACK_CONFIG_URI}                     /${API_VERSION}/stacks/config/{ticket-id}
 
 
-生成应用栈配置清单模板
-${STACK_TEMPLATE_URI}                   /${API_VERSION}/stacks/template/{ticket-id}
+# 生成应用栈配置清单模板
+# ${STACK_TEMPLATE_URI}                   /${API_VERSION}/stacks/template/{ticket-id}
 
 
-验证部署清单文件
-${STACK_VERIFY_URI}                     /${API_VERSION}/stacks/verify/{ticket-id}
+# 验证部署清单文件
+# ${STACK_VERIFY_URI}                     /${API_VERSION}/stacks/verify/{ticket-id}
 
 
-合成DC部署配置文件
-${STACK_COMPOSE_URI}                    /${API_VERSION}/stacks/compose/{ticket-id}
+# 合成DC部署配置文件
+# ${STACK_COMPOSE_URI}                    /${API_VERSION}/stacks/compose/{ticket-id}
