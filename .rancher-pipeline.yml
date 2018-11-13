@@ -1,0 +1,7 @@
+stages:
+- name: compile
+  steps:
+  - runScriptConfig:
+      image: docker:dind
+      shellScript: docker version
+timeout: 60
